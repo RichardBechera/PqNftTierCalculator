@@ -100,37 +100,3 @@ async def main():
     decide_tier(transactions, False)
 
 asyncio.run(main())
-
-
-# simple test for filtering
-def test_filtering():
-    transactions_with_sell = [{"timeStamp": 126, "to": address},
-                    {"timeStamp": 125, "to": address},
-                    {"timeStamp": 122, "to": address},
-                    {"timeStamp": 123, "to": "0x123"},
-                    {"timeStamp": 124, "to": address}]
-    transactions_without_sell = [{"timeStamp": 126, "to": address},
-                                 {"timeStamp": 125, "to": address},
-                                 {"timeStamp": 122, "to": address},
-                                 {"timeStamp": 124, "to": address}]
-    transactions_with_sell_last = [{"timeStamp": 126, "to": address},
-                                   {"timeStamp": 125, "to": address},
-                                   {"timeStamp": 123, "to": "0x123"},
-                                   {"timeStamp": 124, "to": address}]
-    transactions_with_sell_first = [{"timeStamp": 122, "to": address},
-                                    {"timeStamp": 123, "to": "0x123"}]
-
-    result = filter_after_sale(transactions_with_sell)
-    assert len(result) == 3
-
-    result = filter_after_sale(transactions_without_sell)
-    assert len(result) == 4
-
-    result = filter_after_sale(transactions_with_sell_last)
-    assert len(result) == 3
-
-    result = filter_after_sale(transactions_with_sell_first)
-    assert len(result) == 0
-
-
-#test_filtering()
