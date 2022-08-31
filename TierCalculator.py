@@ -11,6 +11,7 @@ curent = r'<span data-toggle="tooltip" data-original-title="Current Price : \$\d
 
 address = "<YOUR ADDRESS>"
 contract = "0xA38898a4Ae982Cb0131104a6746f77fA0dA57aAA"  # QBIT contract address
+pq_deployer = "0x9da4dda0e5195c9fc44c1a9c03372355b665b12b"
 
 tiers = {"Bronze": 500,
          "Silver": 1500,
@@ -90,8 +91,13 @@ def filter_after_sale(transactions):
     collection = Enumerable(transactions)
     ordering = lambda transaction: int(transaction["timeStamp"])
     condition = lambda transaction: transaction["to"].lower() == address.lower()
+    filer_condition = lambda transaction: transaction["from"].lower() != pq_deployer.lower()
 
-    return collection.order_by_descending(ordering).take_while(condition).to_list()
+    return collection\
+        .where(filer_condition)\
+        .order_by_descending(ordering)\
+        .take_while(condition)\
+        .to_list()
 
 
 async def main():
