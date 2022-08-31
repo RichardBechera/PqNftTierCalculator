@@ -89,7 +89,7 @@ def tier_from_value(value):
 def filter_after_sale(transactions):
     collection = Enumerable(transactions)
     ordering = lambda transaction: int(transaction["timeStamp"])
-    condition = lambda transaction: transaction["to"] == address
+    condition = lambda transaction: transaction["to"].lower() == address.lower()
 
     return collection.order_by_descending(ordering).take_while(condition).to_list()
 
