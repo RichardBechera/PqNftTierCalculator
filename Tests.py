@@ -1,8 +1,8 @@
 import unittest
-import TierCalculator
+import app
 
-address = TierCalculator.address
-pq_deployer = TierCalculator.pq_deployer
+address = app.address
+pq_deployer = app.pq_deployer
 
 
 class MyTestCase(unittest.TestCase):
@@ -29,19 +29,19 @@ class MyTestCase(unittest.TestCase):
                                       {"timeStamp": 123, "to": "0x123", "from": "0x420"},
                                       {"timeStamp": 124, "to": address, "from": "0x420"}]
 
-        result = TierCalculator.filter_after_sale(transactions_with_sell)
+        result = app.filter_after_sale(transactions_with_sell)
         assert len(result) == 3
 
-        result = TierCalculator.filter_after_sale(transactions_without_sell)
+        result = app.filter_after_sale(transactions_without_sell)
         assert len(result) == 4
 
-        result = TierCalculator.filter_after_sale(transactions_with_sell_last)
+        result = app.filter_after_sale(transactions_with_sell_last)
         assert len(result) == 3
 
-        result = TierCalculator.filter_after_sale(transactions_with_sell_first)
+        result = app.filter_after_sale(transactions_with_sell_first)
         assert len(result) == 0
 
-        result = TierCalculator.filter_after_sale(transactions_with_deployer)
+        result = app.filter_after_sale(transactions_with_deployer)
         assert len(result) == 2
 
 
