@@ -5,6 +5,7 @@ bscscan-python==2.0.0
 asyncio==3.4.3
 urllib3==1.25.10
 py_linq==1.3.0
+Flask=2.2.2
 
 # Required for deployment on Heroku
 gunicorn==20.1.0
